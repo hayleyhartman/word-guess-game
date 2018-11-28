@@ -1,48 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/reset.css">
     <title>Hangman</title>
 </head>
+
 <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>bad words guessing game</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand name" href="#">Hayley Hartman</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                    <a class="nav-item nav-link about" href="https://github.com/hayleyhartman/word-guess-game" target="_BLANK">Github Repository<span class="sr-only">(current)</span></a>
+        
+                    </div>
                 </div>
+            </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id='title'>bad words guessing game</h1>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div><h3>give it a shot! type a letter: <div class="underscores"></div></h3></div>
-                    <h2><div class="underscores"></div></h2>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <h3>give it a shot! type a letter: </h3>
                 </div>
-                <div class="col-md-6">
-                    <div><h3>wins: <div class = "docWins">0</div></h3></div>
-                    <div><h3>losses: <div class = "docLosses">0</div></h3></div>
-                    <div><h3>moves left: <div class = "movesLeft">10</div></h3></div>
+                <h2>
+                    <div id="underscores"></div>
+                </h2>
+                <br>
+                <br>
+                <div>
+                    <h3>add a word to the computer's vocabulary</h3>
                 </div>
+                <form id="form">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="input" placeholder="nuts!">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary" id="submit" value="value">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row right">
-                <div class="col-md-12">
-                    <div><h4>right! <div class="rightGuess"></div></h4></div>
+
+            <div class="col-md-7 scores">
+                <div>
+                    <h3>wins: <div id="docWins">0</div>
+                    </h3>
                 </div>
-            </div>
-            <br>
-            <div class="row wrong">
-                <div class="col-md-12">
-                    <div><h4>wrong, dummy! <div class="wrongGuess"></div></h4></div>
+                <div>
+                    <h3>losses: <div id="docLosses">0</div>
+                    </h3>
+                </div>
+                <div>
+                    <h3>moves left: <div id="movesLeft">10</div>
+                    </h3>
                 </div>
             </div>
         </div>
 
+        <br>
+        <h3>wrong, dummy!</h3>
 
+        <div class="row wrong" id="wrong">
+            <div class="col-md-12">
+                <div>
+                    <div id="wrongGuess"></div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+    </div>
     <script src="assets/javascript/game.js"></script>
-    
+
 </body>
+
 </html>

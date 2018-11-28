@@ -1,106 +1,107 @@
-//global variables
-var words = ["dang", "darn", "yikes", "rats"];
-var wins = 0;
-var losses = 0;
-var guessesLeft = 10;
-var chosenWord = '';
+let words = ['dang', 'darn', 'yikes', 'rats', 'shoot'];
+let wins = 0;
+let losses = 0;
+let guessesLeft = 10;
+let chosenWord = '';
+let wordLength;
 
-//if user wins
-var userWins = function(wins){
-    var userText = document.getElementById("docWins");
+let underscores = [];
+let wrongWord = [];
+
+startGame = () => {
+    guessesLeft = 10
+    underscores = []
+    wrongWord = []
+    updatePage('wrongGuess', wrongWord)
+
+    chosenWord = words[Math.floor(Math.random () * words.length)];
+
+    findLength(chosenWord)
+
+    updatePage('underscores', underscores.join(' '))
+
+    document.onkeyup = (event) => {
+        let letterGuessed = event.which;
+        if(event.which >= 65 && event.which <= 90){
+            letterGuessed = event.key;
+            check(letterGuessed);
+            console.log(letterGuessed)
+        }
+        else{
+            console.log('Not a letter.  Guess again')
+        }}; 
 }
 
-//if user loses 
-var userLoses = function(losses){
-    var userText = document.getElementById("docLosses");
+updatePage = (getId, toWhat) => {
+    document.getElementById(getId).textContent = toWhat
 }
 
-//chooses random word
-var chosenWord = words[Math.floor(Math.random () * words.length)];
-console.log(chosenWord)
+check = (letter) => {
+    let correctLetter = false;
 
-//start game function
-//arrays to put guesses into
+    console.log(chosenWord)
 
-var underscore = [];
-var rightWord = [];
-var wrongWord = [];
+    for (let i = 0; i < wordLength; i++) {
+        if (chosenWord[i] === letter) {
+            correctLetter = true;
+        }
+    }
 
-var startGame = function () {
-guessesLeft = 10;
-rightWord = [0];
-wrongWord = [0];
+    if (correctLetter) {
+        for (let i = 0; i < underscores.length; i++) {
+            if (chosenWord[i] === letter) {
+                underscores[i] = letter
+                guessesLeft--
+                updatePage('underscores', underscores.join(' '))
+            }
+            didYouWin()
+        }
+    } else {
+        wrongWord.push(letter)
+        wrongWord.toString()
+        updatePage('wrongGuess', wrongWord.join(' '))
+        guessesLeft--
+        updatePage('movesLeft', guessesLeft)
+        console.log(guessesLeft)
+}
+if (guessesLeft === 0) {
+    losses++
+    updatePage('docLosses', losses)
+    startGame()
+}}
+
+didYouWin = () => {
+
+    if (underscores.join('') === chosenWord) {
+        console.log('you win!')
+        win()
+    }
 }
 
-//DOM manipulations
-var docUnderscore = document.getElementsByClassName('underscores');
-var docRightGuess = document.getElementsByClassName('rightGuess');
-var docWrongGuess = document.getElementsByClassName('wrongGuess');
-var docMovesLeft = document.getElementsByClassName('movesLeft')
-
-//main body
-//create underscores based on length of word
-
-var generateUnderscore = () => {
-    for(var i = 0; i < chosenWord.length; i++) {
-        underscore.push('_');
-    }
-    return underscore;
+win = () => {
+    wins++
+    updatePage('docWins', wins)
+    console.log('wins' + wins)
+    startGame()
 }
 
-console.log(generateUnderscore());
-//docUnderscore.textContent = generateUnderscore;
-docUnderscore[0].textContent = underscore.join('');
+findLength = (word) => {
+    let lettersInWord = word.split('')
+    wordLength = lettersInWord.length
 
-//get users guess
-document.addEventListener('keypress', (event) => {
-    var keyword = String.fromCharCode(event.keyCode);
-    console.log(keyword);
+    console.log(wordLength)
 
-if (onkeyup = true) {
-    docMovesLeft--;
+    for(let i = 0; i < wordLength; i++) {
+        underscores.push('_ ');
+    }
 }
-    
-//if users guess is right
-    if (chosenWord.indexOf(keyword) > -1) {
-//add to right words array
-    rightWord.push(keyword); 
-    }
 
+document.getElementById('submit').onclick = function() {
+    event.preventDefault()
+    let input = document.getElementById('input')
+    words.push(input.value)
+    console.log(words)
+    document.getElementById('form').reset()
+}
 
-//replace underscore with right letter
-    underscore[chosenWord.indexOf(keyword)] = keyword;
-
-    docUnderscore[0].textContent = underscore.join('');
-    docRightGuess[0].textContent = rightWord;
-    docWrongGuess[0].textContent = wrongWord;
-
-//checks to see if user word matches guesses
-    if (underscore.join('') == chosenWord) {
-        alert(chosenWord + ", you win!");
-        guessesLeft = 10;
-        userWins(wins);
-        userText.textContent = document.wins;
-        startGame();
-    }
-    else if (guessesLeft !== 0) {
-        wrongWord.push(keyword);
-        console.log(wrongWord);
-        guessesLeft--;
-        startGame();
-    }
-    else {
-        losses = losses + 1;
-        userLoses(losses);
-    }
-
-});
-
-//if right, push to right array
-//if wrong, push to wrong array
-
-//program doesn't care about letter order
-
-//add scorekeepers?
-
-
+startGame()

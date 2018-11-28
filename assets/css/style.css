@@ -2,3 +2,44 @@ body {
     text-align: center;
 }
 
+.navbar {
+    background-color: #753337 !important;
+    margin-bottom: 2%;
+}
+
+.navbar a {
+    color: #f7d1b5 !important;
+    
+}
+
+.navbar .name {
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+
+}
+
+.navbar a:hover {
+    opacity: 0.75;
+}
+
+.navbar .current:hover {
+    opacity: 1;
+}
+
+
+.wrong {
+    border: solid 2px black;
+    height: 100px;
+    padding: 10px;
+    font-size: 40px;
+}
+
+
+input {
+    border: solid 2px black !important;
+    margin-right: 30px;
+}
+
+button {
+    float: left;
+}
